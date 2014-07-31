@@ -30,8 +30,15 @@ class Roku {
 
     public function __call($name, $fargs) {
 
-        if(\Roku\Command::hasName($name)) {           
-            $this->keypress($name);
+        if(\Roku\Command::hasName($name)) {       
+            if(strtoupper(\Roku\Command::LIT) == strtoupper($name)) {
+
+                $command = \Roku\Command::LIT . "_" . $fargs[0];
+                $this->keypress($command);
+            }   
+            else {
+                $this->keypress($name);
+            } 
         }
         else {
             die("Not Found");
@@ -39,23 +46,23 @@ class Roku {
     }
 
     public function keypress($command) {
-        $thid->client->get($this->getUri("keypress", $command));
+        return $thid->client->post($this->getUri("keypress", $command));
     }
     
     public function keydown($command) {
-        $thid->client->get($this->getUri("keydown", $command));
+        return $thid->client->post($this->getUri("keydown", $command));
     }
     
     public function keyup($command) {
-        $thid->client->get($this->getUri("keyup", $command));
+        return $thid->client->post($this->getUri("keyup", $command));
     }
 
     public function apps() {
-        $thid->client->get($this->getUri("keyup", $command));
+        return $thid->client->get($this->getUri("query/apps"));
     }
 
     public function icon() {
-        $thid->client->get($this->getUri("keyup", $command));
+        return $thid->client->get($this->getUri("query/icon"));
     }
 
     private function getUri() {

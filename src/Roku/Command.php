@@ -33,6 +33,14 @@ class Command extends Utils\AbstractEnum {
 
     const LIT = "Lit";
 
+    const BACK = "Back";
+    
+    const BACKSPACE = "Backspace";
+    
+    const SEARCH = "Search";
+
+    const Enter = "Enter";
+
     public function getPath(){
 
     }

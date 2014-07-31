@@ -46,23 +46,23 @@ class Roku {
     }
 
     public function keypress($command) {
-        return $thid->client->post($this->getUri("keypress", $command));
+        return $this->client->post($this->getUri("keypress", $command));
     }
     
     public function keydown($command) {
-        return $thid->client->post($this->getUri("keydown", $command));
+        return $this->client->post($this->getUri("keydown", $command));
     }
     
     public function keyup($command) {
-        return $thid->client->post($this->getUri("keyup", $command));
+        return $this->client->post($this->getUri("keyup", $command));
     }
 
     public function apps() {
-        return $thid->client->get($this->getUri("query/apps"));
+        return $this->client->get($this->getUri("query/apps"));
     }
 
     public function icon() {
-        return $thid->client->get($this->getUri("query/icon"));
+        return $this->client->get($this->getUri("query/icon"));
     }
 
     private function getUri() {

@@ -1,0 +1,55 @@
+# cache directories
+Thumbs.db
+*.DS_Store
+*.empty
+
+# phpstorm project files
+.idea
+
+# eclipse
+.buildpath
+.project
+.settings
+
+# SublimeText
+/*.sublime-project
+
+.htaccess
+phpunit.xml
+vendor
+composer.phar
+
+#composer
+/composer.lock
+
+# Windows image file caches
+Thumbs.db
+
+# Folder config file
+Desktop.ini
+
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+.elc
+auto-save-list
+tramp
+.\#*
+
+.DS_Store
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Build
+/build/logs
+/build/pdepend
+
+#Sublime
+*.sublime-project
+*.sublime-workspace

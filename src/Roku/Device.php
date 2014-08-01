@@ -111,6 +111,12 @@ class Device {
         return $manufacturer;
     }
 
+    /**
+     * Set Manufacturer
+     *
+     * @param string $manufacturer
+     * @return \Roku\Device
+     */
     public function setManufacturer($manufacturer) {
         $this->manufacturer = $manufacturer;
         return $this;

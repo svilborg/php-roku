@@ -11,13 +11,14 @@ class RokuTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue(true);
 
-/*        $request = Request::get("http://google.com")->send();
 
-        echo $request->code;die;*/
+        $host = "http://192.168.72.34";
 
-        $roku = new \Roku\Roku("127.0.0.1");
+        $roku = new \Roku\Roku($host);
 
-        $roku->home();
+        //$roku->home();
+
+        echo $roku->apps();
 
     }
 

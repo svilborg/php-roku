@@ -3,6 +3,7 @@ namespace Roku;
 
 use \Roku\Commands\Command;
 use \Roku\Commands\Sensor;
+use \Roku\Commands\Touch;
 
 /**
  * Roku Client
@@ -275,6 +276,32 @@ class Roku {
         }
 
         return $response->raw_body;
+    }
+
+   /**
+     * Touch
+     *
+     * @param string $x
+     * @param string $y
+     * @param string $op
+     * 
+     * @throws Exception
+     * @return string
+     */
+    public function touch($x =0, $y = 0, $op = Touch::DOWN) {
+        $params = array();
+
+        if (!Touch::hasName($op)) {
+            throw new Exception("Touch Option Not Found - " . $op);
+        }
+
+        $params = array(
+            "touch.0.x"  => $x,
+            "touch.0.y"  => $y,
+            "touch.0.op" => $op
+        );
+
+        return $this->input($params);
     }
 
     /**

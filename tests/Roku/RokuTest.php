@@ -35,7 +35,16 @@ class RokuTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($this->roku->orientation(0.1,0.2,0.3));
         $this->assertNotNull($this->roku->magnetic(0.1,0.2,0.3));
     }
-    
+   
+    public function testTouches()
+    {
+        $this->assertNotNull($this->roku->touch(0.1,0.2));
+        $this->assertNotNull($this->roku->touch(0.1,0.2, "down"));
+        $this->assertNotNull($this->roku->touch(0.1,0.2, "up"));
+        $this->assertNotNull($this->roku->touch(0.1,0.2, "move"));
+        
+    }
+
     public function testIcon()
     {
         $app = new \Roku\Application("dev", "0.1.0", "Test App");
@@ -57,6 +66,15 @@ class RokuTest extends \PHPUnit_Framework_TestCase
             );
 
         $this->assertNotNull($this->roku->rotate());
+    }
+
+    public function testErrorsTouch()
+    {
+        $this->setExpectedException(
+            '\Roku\Exception'
+            );
+
+        $this->assertNotNull($this->roku->touch(1,1,"nosuchtouch"));
     }
 
     public function testApps()

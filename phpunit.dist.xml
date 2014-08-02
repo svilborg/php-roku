@@ -1,0 +1,23 @@
+<phpunit bootstrap="./tests/bootstrap.php" backupGlobals="true"
+	 colors="true" processIsolation="false"
+	stopOnFailure="false" syntaxCheck="true" verbose="true">
+
+	<testsuites>
+		<testsuite name="Roku PHP Test Suite">
+			<directory>./tests</directory>
+		</testsuite>
+	</testsuites>
+
+    <logging>
+        <log type="junit" target="build/logs/junit.xml" logIncompleteSkipped="false" />
+        <log type="coverage-clover" target="build/logs/clover.xml"/>
+    </logging>
+
+    <filter>
+        <blacklist>
+            <directory suffix=".php">./vendor</directory>
+            <directory suffix=".php">./docs</directory>
+        </blacklist>
+    </filter>
+
+</phpunit>

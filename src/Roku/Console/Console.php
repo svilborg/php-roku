@@ -39,12 +39,16 @@ class Console {
         //var_dump($commands);die;
 
         foreach($commands as $command) {
-            if(\Roku\Commands\Command::isValidName($command)) {
-                $this->Roku->$command();
+            if(\Roku\Commands\Command::hasName($command)) {
+                $this->roku->$command();
             }
             else {
-                var_dump($command);
+                $chars = str_split($command);
 
+                foreach ($chars as $char) {
+                    $this->roku->lit($char);
+                }
+                //var_dump($command);
             }
         }
     }

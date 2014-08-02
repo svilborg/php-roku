@@ -68,13 +68,29 @@ class Roku {
         if (Command::hasName($name)) {
             if (strtoupper(Command::LIT) == strtoupper($name)) {
 
-                $command = Command::LIT . "_" . $fargs[0];
+                $command = Command::LIT . "_" . ($fargs[0] ? $fargs[0] : "");
+                
                 return $this->keypress($command);
             } else {
                 return $this->keypress($name);
             }
         } else {
             throw new Exception("Command Not Found");
+        }
+    }
+
+    /**
+     * Send text as multiple literal calls
+     *
+     * @param string $text Text
+     * @throws Exception
+     * @return void
+     */
+    public function literals($text) {
+        $text = str_split($text);
+
+        foreach ($chars as $char) {
+            $this->lit($char);
         }
     }
 
@@ -117,8 +133,7 @@ class Roku {
     /**
      * Keyup
      *
-     * @param string $command
-     *            Command name
+     * @param string $command Command name
      * @throws Exception
      */
     public function keyup($command) {

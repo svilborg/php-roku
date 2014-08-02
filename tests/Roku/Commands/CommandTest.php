@@ -1,7 +1,7 @@
 <?php
 namespace Tests\Roku;
 
-use Roku;
+use \Roku\Commands\Command;
 
 class CommandTest extends \PHPUnit_Framework_TestCase
 {
@@ -13,11 +13,7 @@ class CommandTest extends \PHPUnit_Framework_TestCase
 
     public function testEmpty()
     {
-        $this->assertTrue(Roku\Command::hasName("PLAY"));
-    }
-
-    protected function tearDown()
-    {
-        parent::tearDown();
+        $this->assertTrue(Command::hasName("PLAY"));
+        $this->assertFalse(Command::hasName("nosuch"));
     }
 }

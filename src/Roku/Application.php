@@ -25,6 +25,19 @@ class Application {
     private $name;
 
     /**
+     * Init
+     *
+     * @param string $id Id
+     * @param string $version Version
+     * @param string $name Name
+     */
+    public function __construct($id, $version, $name) {
+        $this->id = $id;
+        $this->version = $version;
+        $this->name = $name;
+    }
+
+    /**
      * Get Id
      * @return string
      */
@@ -37,7 +50,7 @@ class Application {
      * @return string
      */
     public function getVersion() {
-        return $version;
+        return $this->version;
     }
 
     /**
@@ -45,7 +58,7 @@ class Application {
      * @return string
      */
     public function getName() {
-        return $name;
+        return $this->name;
     }
 
     /**

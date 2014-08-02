@@ -1,11 +1,11 @@
 <?php
-namespace Roku;
+namespace Roku\Commands;
 
 /**
  * Command
  *
  */
-class Command extends Utils\AbstractEnum {
+class Command extends \Roku\Utils\AbstractEnum {
 
     const PLAY = "Play";
 
@@ -34,9 +34,9 @@ class Command extends Utils\AbstractEnum {
     const LIT = "Lit";
 
     const BACK = "Back";
-    
+
     const BACKSPACE = "Backspace";
-    
+
     const SEARCH = "Search";
 
     const Enter = "Enter";

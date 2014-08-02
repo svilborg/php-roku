@@ -128,11 +128,8 @@
     <app id="37663" version="1.0.5">National Geographic Kids</app>
     
 	
-    <app id="40299" version="1.20.132">Qello Concerts</app>
-    
-	
-    <app id="dev" version="1.20.132">Qello Concerts</app>
-    
+    <app id="dev" version="1.20.132">TestApp</app>
+        
 
 </apps>
 

@@ -1,4 +1,4 @@
-ROku PHP API
+Roku PHP Library
 ================================================
 
 PHP Library for communication with Roku External Control Protocol
@@ -16,9 +16,7 @@ Install using composer
 ## Requirements
 
 * PHP Version >=5.3.2.
-* PHP Guzzle Library
-* Requires a API Key and User ID from [Encoding.com](http://www.encoding.com/)
-* [See also the API documentation](http://www.encoding.com/api)
+* PHP Httpful Library
 
 ## Running the tests
 

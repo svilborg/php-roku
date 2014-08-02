@@ -1,0 +1,20 @@
+language: php
+
+php:
+  - 5.3
+  - 5.4
+  - 5.5
+
+before_script:
+  - composer install --dev --no-interaction --prefer-source
+  - phpunit --version
+  - pear config-set auto_discover 1
+  - pear install pear.phing.info/phing
+  - pear install pear.phpunit.de/phploc
+  - pear install pear/PHP_CodeSniffer
+  - pear install pear.pdepend.org/PHP_Depend
+
+script: phpunit --coverage-text
+
+after_script:
+  - php vendor/bin/coveralls -v

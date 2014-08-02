@@ -2,6 +2,7 @@
 namespace Roku;
 
 use \Roku\Commands\Command;
+use \Roku\Commands\Sensor;
 
 /**
  * Roku Client
@@ -65,16 +66,31 @@ class Roku {
      * @param array $fargs Arguments
      */
     public function __call($name, $fargs) {
+
+
         if (Command::hasName($name)) {
             if (strtoupper(Command::LIT) == strtoupper($name)) {
 
                 $command = Command::LIT . "_" . ($fargs[0] ? $fargs[0] : "");
                 
                 return $this->keypress($command);
-            } else {
+            } 
+            else {
                 return $this->keypress($name);
             }
-        } else {
+        }
+        elseif (Sensor::hasName($name)) {
+
+            $params = array();
+            $axis   = array("x", "y", "z");
+
+            foreach($fargs as $i => $value) {
+                $params[strtolower($name) . "." . $axis[$i]] = $value; 
+            }
+
+            return $this->input($params);
+        }
+        else {
             throw new Exception("Command Not Found");
         }
     }
@@ -137,11 +153,11 @@ class Roku {
      * @throws Exception
      */
     public function keyup($command) {
-        $result = $this->client->post($this->getUri("keyup", $command));
+        $response = $this->client->post($this->getUri("keyup", $command));
 
         $this->delay();
 
-        if ($result->code !== 200) {
+        if ($response->code !== 200) {
             throw new Exception("Command Error - " . $command, $response->code);
         }
 
@@ -235,7 +251,7 @@ class Roku {
      * @return string
      */
     public function launch(Application $app, $params = array()) {
-        $response = $this->client->get($this->getUri("launch", $app->getId()), $params);
+        $response = $this->client->post($this->getUri("launch", $app->getId()), $params);
 
         if ($response->code !== 200) {
             throw new Exception("Command Error - launch");
@@ -252,7 +268,7 @@ class Roku {
      * @return string
      */
     public function input($params = array()) {
-        $response = $this->client->get($this->getUri("input"), $params);
+        $response = $this->client->post($this->getUri("input"), $params);
 
         if ($response->code !== 200) {
             throw new Exception("Command Error - input");
@@ -284,5 +300,13 @@ class Roku {
         if($this->delay > 0) {  
             sleep($this->delay);
         }
+    }
+
+    /**
+     * toString
+     * @return string
+     */
+    public function __toString() {
+        return "Roku [" . $this->host . ":" . $this->port ."]";
     }
 }

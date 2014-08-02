@@ -19,12 +19,15 @@ abstract class AbstractEnum {
      * @return array
      */
     private static function getConstants() {
-        if (self::$constCache === null) {
+
+        $class = get_called_class();
+
+        if (!isset(self::$constCache[$class])) {
             $reflect = new \ReflectionClass(get_called_class());
-            self::$constCache = $reflect->getConstants();
+            self::$constCache[$class] = $reflect->getConstants();
         }
 
-        return self::$constCache;
+        return self::$constCache[$class];
     }
 
     /**

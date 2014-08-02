@@ -11,7 +11,7 @@ class RokuTest extends \PHPUnit_Framework_TestCase
         $host = "http://127.0.0.1";
         $http = $this->getHttpInstance();
 
-        $this->roku = new \Roku\Roku($host);
+        $this->roku = new \Roku\Roku($host, 8060, 0.1);
         $this->roku->setClient($http);
 
         parent::setUp();
@@ -22,7 +22,32 @@ class RokuTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($this->roku->home());
         $this->assertNotNull($this->roku->up());
         $this->assertNotNull($this->roku->down());
+        $this->assertNotNull($this->roku->rev());
         $this->assertNotNull($this->roku->select());
+        $this->assertNotNull($this->roku->keydown("home"));
+        $this->assertNotNull($this->roku->keyup("home"));
+    }
+
+    public function testSensors()
+    {
+        $this->assertNotNull($this->roku->acceleration(0.1,0.2,0.3));
+        $this->assertNotNull($this->roku->rotation(1,2,3));
+        $this->assertNotNull($this->roku->orientation(0.1,0.2,0.3));
+        $this->assertNotNull($this->roku->magnetic(0.1,0.2,0.3));
+    }
+    
+    public function testIcon()
+    {
+        $app = new \Roku\Application("dev", "0.1.0", "Test App");
+
+        $this->assertNotNull($this->roku->icon($app));
+    }
+
+    public function testLaunch()
+    {
+        $app = new \Roku\Application("dev", "0.1.0", "Test App");
+
+        $this->assertNotNull($this->roku->launch($app, array("contentID" => 120)));
     }
 
     public function testErrors()

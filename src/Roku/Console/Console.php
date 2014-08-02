@@ -49,6 +49,9 @@ class Console {
                     echo "\n";
                 }
             }
+            else {
+                $this->help();
+            }
         }
     }
 

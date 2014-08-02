@@ -14,25 +14,30 @@ class Console {
     private $roku;
 
     public function start() {
-        $options = getopt("h:p:d:c:i", array("help"));
+        $options = getopt("h:p:d:c:options", array("help"));
 
         $host  = isset($options["h"]) ? $options["h"] : "127.0.0.1";
         $port  = isset($options["p"]) ? $options["p"] : 8060;
         $delay = isset($options["d"]) ? $options["d"] : 1.3;
 
-        $http = new \Roku\Utils\HttpConsole();
-
-        $this->roku = new \Roku\Roku($host, $port, $delay);
-        $this->roku->setClient($http);
 
         if(isset($options["help"])) {
             $this->help();
         }
-        elseif(isset($options["i"])) {
-            $this->interactive();
-        }        
-        elseif(isset($options["c"])) {
-            $this->commands($options["c"]);
+        else {
+
+
+            $http = new \Roku\Utils\HttpConsole();
+
+            $this->roku = new \Roku\Roku($host, $port, $delay);
+            $this->roku->setClient($http);
+
+            if(isset($options["i"])) {
+                $this->interactive();
+            }        
+            elseif(isset($options["c"])) {
+                $this->commands($options["c"]);
+            }
         }
     }
 
@@ -106,18 +111,18 @@ class Console {
 
     private function  help() {
         echo "
-PHP Roku Console
+        PHP Roku Console
 
-Usage: roku [OPTION] ..
+        Usage: roku [OPTION] ..
 
-  -h <host>       Host
-  -p <port>       Port
-  -d <delay>      Delay between each command
-  -i              Interactive mode (Listens for keyboard keystrokes)
-  -c <commands>   Command mode (Specify commands to be executed, Example -c \"up down test@gmail.com down select home\")
-  --help          Shows this help
+        -h <host>       Host
+        -p <port>       Port
+        -d <delay>      Delay between each command
+        -i              Interactive mode (Listens for keyboard keystrokes)
+        -c <commands>   Command mode (Specify commands to be executed, Example -c \"up down test@gmail.com down select home\")
+        --help          Shows this help
 
-";
+        ";
     }
 
 

@@ -21,11 +21,9 @@ class Command extends \Roku\Utils\AbstractEnum {
 
     const SELECT = "Select";
 
-    const NEXT = "Next";
-
     const REV = "Rev";
 
-    const FORWARD = "Fwd";
+    const FWD = "Fwd";
 
     const REPLAY = "InstantReplay";
 

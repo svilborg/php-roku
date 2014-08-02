@@ -87,7 +87,7 @@ class Roku {
      * @return void
      */
     public function literals($text) {
-        $text = str_split($text);
+        $chars = str_split($text);
 
         foreach ($chars as $char) {
             $this->lit($char);

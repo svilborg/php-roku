@@ -14,7 +14,7 @@ class Console {
     private $roku;
 
     public function start() {
-        $options = getopt("h:p:d:c:l");
+        $options = getopt("h:p:d:c:l", array("help"));
 
         $host  = isset($options["h"]) ? $options["h"] : "127.0.0.1";
         $port  = isset($options["p"]) ? $options["p"] : 8060;
@@ -25,9 +25,12 @@ class Console {
         $this->roku = new \Roku\Roku($host, $port, $delay);
         $this->roku->setClient($http);
 
-        if(isset($options["l"])) {
-            $this->listen();
+        if(isset($options["help"])) {
+            $this->help();
         }
+        elseif(isset($options["l"])) {
+            $this->listen();
+        }        
         elseif(isset($options["c"])) {
             $this->commands($options["c"]);
         }
@@ -36,19 +39,12 @@ class Console {
     public function commands($commands) {
         $commands = explode(" ", $commands);
 
-        //var_dump($commands);die;
-
         foreach($commands as $command) {
             if(\Roku\Commands\Command::hasName($command)) {
                 $this->roku->$command();
             }
             else {
-                $chars = str_split($command);
-
-                foreach ($chars as $char) {
-                    $this->roku->lit($char);
-                }
-                //var_dump($command);
+                $this->roku->literals($command);
             }
         }
     }
@@ -58,30 +54,58 @@ class Console {
         
         while ($c = (fread(STDIN, 4))) {
 
-/*            echo "\n";
-            echo "--------------" . ord($c);
-            echo "\n";
-            echo "--------------" . strpos($c, '^[');
-            echo "\n";
-            echo "--------------" . strpos($c, 'B');
-            echo "\n";
-            echo "--------------" . strpos($c, '[');
-            echo "\n";*/
+            $key = $c;
 
-            $key = "";
+            echo "\n";
 
             //Special Keys
             if(ord($c) == 27) {
-                if(strpos($c, 'B') && strpos($c, '[')) {
-                    $key = "down";
+
+                if(strpos($c, '[')) {
+
+                    if(strpos($c, 'B')) {
+                        $this->roku->down();
+                    }
+                    else if(strpos($c, 'A')) {
+                        $this->roku->up();
+                    }
+                    else if(strpos($c, 'D')) {
+                        $this->roku->left();
+                    }
+                    else if(strpos($c, 'C')) {
+                        $this->roku->right();
+                    }
+                    else {
+
+                    }
+                }
+
+                if(strpos($c, 'O')) {
+                    echo $c . "CC";die;
+                    if(strpos($c, 'H')) {
+                        $this->roku->home();
+                    }
+                    elseif(strpos($c, 'F')) {
+                        $this->roku->back();
+                    }
+                }
+                
+                if(strpos($c, '5')) {
+                    $this->roku->fwd();
+                }
+
+                if(strpos($c, '6')) {
+                    $this->roku->rev();
                 }
             }
-            else {
-                $key = "a";
+            else {               
+                $this->roku->lit($key);
             }
-
-            //echo "\nRead from STDIN: " . $c . "\ninput# ";
         }
+    }
+
+    private function  help() {
+
     }
 
 

@@ -105,7 +105,19 @@ class Console {
     }
 
     private function  help() {
+        echo "
+PHP Roku Console
 
+Usage: roku [OPTION] ..
+
+  -h <host>       Host
+  -p <port>       Port
+  -d <delay>      Delay between each command
+  -i              Interactive mode (Listens for keyboard keystrokes)
+  -c <commands>   Command mode (Specify commands to be executed, Example -c \"up down test@gmail.com down select home\")
+  --help          Shows this help
+
+";
     }
 
 

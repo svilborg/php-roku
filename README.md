@@ -61,9 +61,17 @@ $roku->select();
 Usage Commandline
 =================
 
+For the list of commands execute :
+
 ```bash
 
-vendor/bin/roku --help
+$ vendor/bin/roku --help
+
+```
+
+It displays :
+
+```bash
 
 PHP Roku Console
 
@@ -79,12 +87,13 @@ Usage: roku [OPTION] ..
 
 ```
 
+Example usage of command and interactivemodes :
+
 ```bash
 
-vendor/bin/roku -h 192.168.72.10 -p 8060 -d 1 -c "up test@gmailc.om down down select home"
+$ vendor/bin/roku -h 192.168.72.10 -p 8060 -d 1 -c "up test@gmailc.om down down select home"
 
-vendor/bin/roku  -h 192.168.72.10 -d 1 -i
-
+$ vendor/bin/roku  -h 192.168.72.10 -d 1 -i
 
 ```
 

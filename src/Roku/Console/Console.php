@@ -14,7 +14,7 @@ class Console {
     private $roku;
 
     public function start() {
-        $options = getopt("h:p:d:c:l", array("help"));
+        $options = getopt("h:p:d:c:i", array("help"));
 
         $host  = isset($options["h"]) ? $options["h"] : "127.0.0.1";
         $port  = isset($options["p"]) ? $options["p"] : 8060;
@@ -28,8 +28,8 @@ class Console {
         if(isset($options["help"])) {
             $this->help();
         }
-        elseif(isset($options["l"])) {
-            $this->listen();
+        elseif(isset($options["i"])) {
+            $this->interactive();
         }        
         elseif(isset($options["c"])) {
             $this->commands($options["c"]);
@@ -49,7 +49,7 @@ class Console {
         }
     }
 
-    public function listen() {
+    public function interactive() {
         system("stty -icanon");
         
         while ($c = (fread(STDIN, 4))) {

@@ -39,9 +39,9 @@ Requirements
 Usage
 =====
 
+Execute commands :
 
 ```php
-
 
 $roku = new \Roku\Roku("192.168.72.10", 8060, 0.2);
 
@@ -58,6 +58,42 @@ $roku->down();
 $roku->select();
 
 ```
+
+List the applicatioin installed on the device :
+
+```php
+
+
+$roku = new \Roku\Roku("192.168.72.10", 8060, 0.2);
+
+$applications = $roku->apps();
+
+foreach ($applications as $application) {
+    echo $application->getId();
+    echo $application->getVersion();
+    echo $application->getName();
+    echo "\n";
+}
+
+```
+
+Get device information :
+
+```php
+
+
+$roku = new \Roku\Roku("192.168.72.10", 8060, 0.2);
+
+$device = $roku->device();
+
+echo $device->getSerialNumber();
+echo $device->getModelName();
+echo $device->getModelDescription();
+// etc..
+
+
+```
+
 Usage Commandline
 =================
 
@@ -87,7 +123,7 @@ Usage: roku [OPTION] ..
 
 ```
 
-Example usage of command and interactivemodes :
+Example usage of command and interactive modes :
 
 ```bash
 

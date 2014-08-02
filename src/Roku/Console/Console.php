@@ -14,7 +14,7 @@ class Console {
     private $roku;
 
     public function start() {
-        $options = getopt("h:p:d:c:options", array("help"));
+        $options = getopt("h:p:d:c:it", array("help"));
 
         $host  = isset($options["h"]) ? $options["h"] : "127.0.0.1";
         $port  = isset($options["p"]) ? $options["p"] : 8060;
@@ -25,18 +25,29 @@ class Console {
             $this->help();
         }
         else {
-
-
-            $http = new \Roku\Utils\HttpConsole();
-
             $this->roku = new \Roku\Roku($host, $port, $delay);
-            $this->roku->setClient($http);
+
+            if(isset($options["t"])) {   
+                $this->roku->setClient(new \Roku\Utils\HttpConsole());
+            }
 
             if(isset($options["i"])) {
-                $this->interactive();
+                try {
+                    $this->interactive();
+                }
+                catch(\Exception $e) {
+                    echo "Error " . $e->getMessage();
+                    echo "\n";
+                }
             }        
             elseif(isset($options["c"])) {
-                $this->commands($options["c"]);
+                try {
+                    $this->commands($options["c"]);
+                }
+                catch(\Exception $e) {
+                    echo "Error " . $e->getMessage();
+                    echo "\n";
+                }
             }
         }
     }
@@ -86,7 +97,7 @@ class Console {
                 }
 
                 if(strpos($c, 'O')) {
-                    echo $c . "CC";die;
+                    
                     if(strpos($c, 'H')) {
                         $this->roku->home();
                     }
@@ -120,6 +131,7 @@ class Console {
         -d <delay>      Delay between each command
         -i              Interactive mode (Listens for keyboard keystrokes)
         -c <commands>   Command mode (Specify commands to be executed, Example -c \"up down test@gmail.com down select home\")
+        -t              Test Mode (Does not send commands.Just simulates them.)
         --help          Shows this help
 
         ";

@@ -47,22 +47,6 @@ class Console {
 
             }
         }
-
-  /*      $this->roku->up();
-        $this->roku->down();
-        $this->roku->left();
-        $this->roku->right();
-        $this->roku->lit("O");       
-        $this->roku->home();        
-        $this->roku->select();        
-        $this->roku->next();        
-        $this->roku->rev();
-        $this->roku->enter();
-        $this->roku->replay();
-        $this->roku->info();
-        $this->roku->back();
-        $this->roku->backspace();
-        $this->roku->play();*/
     }
 
     public function listen() {

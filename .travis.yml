@@ -14,7 +14,7 @@ before_script:
   - pear install pear/PHP_CodeSniffer
   - pear install pear.pdepend.org/PHP_Depend
 
-script: phpunit --coverage-text
+script: phpunit
 
 after_script:
   - php vendor/bin/coveralls -v

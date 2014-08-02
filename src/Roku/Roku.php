@@ -28,18 +28,24 @@ class Roku {
      * @var \Roku\Utils\Http
      */
     private $client;
+    
+    /**
+     * Delay
+     *
+     * @var float
+     */
+    private $delay;
 
     /**
      * Init
      *
-     * @param string $host
-     *            Host
-     * @param number $port
-     *            Port Number
+     * @param string $host Host
+     * @param number $port Port Number
      */
-    public function __construct($host, $port = 8060) {
-        $this->host = $host;
-        $this->port = $port;
+    public function __construct($host, $port = null, $delay = 0) {
+        $this->host   = $host;
+        $this->port   = $port ? $port : 8060;
+        $this->delay  = $delay;
         $this->client = new \Roku\Utils\Http();
     }
 
@@ -55,10 +61,8 @@ class Roku {
     /**
      * Catchase all function calls
      *
-     * @param string $name
-     *            Function name
-     * @param array $fargs
-     *            Arguments
+     * @param string $name Function name
+     * @param array $fargs Arguments
      */
     public function __call($name, $fargs) {
         if (Command::hasName($name)) {
@@ -77,12 +81,13 @@ class Roku {
     /**
      * Keypress
      *
-     * @param string $command
-     *            Command name
+     * @param string $command Command name
      * @throws Exception
      */
     public function keypress($command) {
         $response = $this->client->post($this->getUri("keypress", $command));
+
+        $this->delay();
 
         if ($response->code !== 200) {
             throw new Exception("Command Error - " . $command, $response->code);
@@ -92,14 +97,15 @@ class Roku {
     }
 
     /**
-     * KeEydown
+     * Keydown
      *
-     * @param string $command
-     *            Command name
+     * @param string $command Command name
      * @throws Exception
      */
     public function keydown($command) {
         $response = $this->client->post($this->getUri("keydown", $command));
+
+        $this->delay();
 
         if ($response->code !== 200) {
             throw new Exception("Command Error - " . $command, $response->code);
@@ -117,6 +123,8 @@ class Roku {
      */
     public function keyup($command) {
         $result = $this->client->post($this->getUri("keyup", $command));
+
+        $this->delay();
 
         if ($result->code !== 200) {
             throw new Exception("Command Error - " . $command, $response->code);
@@ -251,5 +259,15 @@ class Roku {
         }
 
         return $uri;
+    }
+
+    /**
+     * Execute sleep
+     * @return void
+     */
+    private function delay() {
+        if($this->delay > 0) {  
+            sleep($this->delay);
+        }
     }
 }

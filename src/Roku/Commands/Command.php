@@ -39,9 +39,6 @@ class Command extends \Roku\Utils\AbstractEnum {
 
     const SEARCH = "Search";
 
-    const Enter = "Enter";
+    const ENTER = "Enter";
 
-    public function getPath(){
-
-    }
 }

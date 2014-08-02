@@ -97,7 +97,7 @@ class Console {
                 }
 
                 if(strpos($c, 'O')) {
-                    
+
                     if(strpos($c, 'H')) {
                         $this->roku->home();
                     }
@@ -121,20 +121,22 @@ class Console {
     }
 
     private function  help() {
-        echo "
-        PHP Roku Console
 
-        Usage: roku [OPTION] ..
+   echo <<<EOT
+PHP Roku Console
 
-        -h <host>       Host
-        -p <port>       Port
-        -d <delay>      Delay between each command
-        -i              Interactive mode (Listens for keyboard keystrokes)
-        -c <commands>   Command mode (Specify commands to be executed, Example -c \"up down test@gmail.com down select home\")
-        -t              Test Mode (Does not send commands.Just simulates them.)
-        --help          Shows this help
+Usage: roku [OPTION] ..
 
-        ";
+-h <host>       Host
+-p <port>       Port
+-d <delay>      Delay between each command
+-i              Interactive mode (Listens for keyboard keystrokes)
+-c <commands>   Command mode (Specify commands to be executed, Example -c "up down test@gmail.com down select home")
+-t              Test Mode (Does not send commands.Just simulates them.)
+--help          Shows this help
+
+
+EOT;
     }
 
 

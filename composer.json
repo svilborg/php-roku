@@ -30,5 +30,5 @@
 			"Roku":"src/"
 		}
 	},
-	"bin": ["bin/roku"]
+	"bin": ["composer/bin/roku"]
 }

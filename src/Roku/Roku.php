@@ -72,7 +72,7 @@ class Roku {
         if (Command::hasName($name)) {
             if (strtoupper(Command::LIT) == strtoupper($name)) {
 
-                $command = Command::LIT . "_" . ($fargs[0] ? $fargs[0] : "");
+                $command = Command::LIT . "_" . ($fargs[0] ? urlencode($fargs[0]) : "");
                 
                 return $this->keypress($command);
             } 

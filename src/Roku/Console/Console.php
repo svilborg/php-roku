@@ -76,50 +76,61 @@ class Console {
             $key = $c;
 
             echo "\n";
+            echo ord($c);
 
-            //Special Keys
-            if(ord($c) == 27) {
+            try {
+                //Special Keys
+                if(ord($c) == 27) {
 
-                if(strpos($c, '[')) {
+                    if(strpos($c, '[')) {
 
-                    if(strpos($c, 'B')) {
-                        $this->roku->down();
-                    }
-                    else if(strpos($c, 'A')) {
-                        $this->roku->up();
-                    }
-                    else if(strpos($c, 'D')) {
-                        $this->roku->left();
-                    }
-                    else if(strpos($c, 'C')) {
-                        $this->roku->right();
-                    }
-                    else {
+                        if(strpos($c, 'B')) {
+                            $this->roku->down();
+                        }
+                        else if(strpos($c, 'A')) {
+                            $this->roku->up();
+                        }
+                        else if(strpos($c, 'D')) {
+                            $this->roku->left();
+                        }
+                        else if(strpos($c, 'C')) {
+                            $this->roku->right();
+                        }
+                        else {
 
+                        }
+                    }
+
+                    if(strpos($c, 'O')) {
+
+                        if(strpos($c, 'H')) {
+                            $this->roku->home();
+                        }
+                        elseif(strpos($c, 'F')) {
+                            $this->roku->back();
+                        }
+                    }
+                    
+                    if(strpos($c, '5')) {
+                        $this->roku->fwd();
+                    }
+
+                    if(strpos($c, '6')) {
+                        $this->roku->info();
                     }
                 }
-
-                if(strpos($c, 'O')) {
-
-                    if(strpos($c, 'H')) {
-                        $this->roku->home();
-                    }
-                    elseif(strpos($c, 'F')) {
-                        $this->roku->back();
-                    }
+                elseif(ord($c) == 10) {
+                    $this->roku->select();
                 }
-                
-                if(strpos($c, '5')) {
-                    $this->roku->fwd();
-                }
-
-                if(strpos($c, '6')) {
-                    $this->roku->rev();
+                else {               
+                    $this->roku->lit($key);
                 }
             }
-            else {               
-                $this->roku->lit($key);
+            catch(\Exception $e) {
+                echo "Not registered keystroke - " . $key;
             }
+
+            
         }
     }
 

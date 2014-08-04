@@ -10,14 +10,9 @@ class Http {
      * @return \Httpful\Response
      */
     public function get($uri, $params = array()) {
+        $uri = $this->buildUri($uri, $params);
 
-        if($params) {
-            $uri .= "?" . http_build_query($params);
-        }
-
-        $response = \Httpful\Request::get($uri)->send();
-
-        return $response;
+        return = \Httpful\Request::get($uri)->send();
     }
 
     /**
@@ -27,13 +22,16 @@ class Http {
      * @return \Httpful\Response
      */
     public function post($uri, $params = array()) {
+        $uri = $this->buildUri($uri, $params);
 
+        return \Httpful\Request::post($uri)->send();
+    }
+
+    private function  buildUri ($uri, $params = array()) {
         if($params) {
-            $uri .= "?" . http_build_query($params);
+            return $uri . "?" . http_build_query($params);
         }
 
-        $response = \Httpful\Request::post($uri)->send();
-
-        return $response;
+        return $uri;
     }
 }

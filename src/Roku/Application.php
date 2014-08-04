@@ -31,7 +31,7 @@ class Application {
      * @param string $version Version
      * @param string $name Name
      */
-    public function __construct($id, $version, $name) {
+    public function __construct($id, $version = "", $name = "") {
         $this->id = $id;
         $this->version = $version;
         $this->name = $name;

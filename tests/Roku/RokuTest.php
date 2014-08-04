@@ -59,6 +59,16 @@ class RokuTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($this->roku->launch($app, array("contentID" => 120)));
     }
 
+    public function testApplication()
+    {
+        $app = new \Roku\Application("dev");
+        $app->setId("dev");
+        $app->setName("Test App");
+        $app->setVersion("0.1.0");
+
+        $this->assertEquals(new \Roku\Application("dev", "0.1.0", "Test App"), $app);
+    }
+
     public function testErrors()
     {
         $this->setExpectedException(

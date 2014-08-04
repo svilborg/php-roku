@@ -1,6 +1,11 @@
 Roku PHP Library
 ================================================
 
+[![Build Status](https://api.travis-ci.org/svilborg/php-roku.png?branch=master)](https://travis-ci.org/svilborg/php-roku)
+[![Latest Stable Version](https://poser.pugx.org/svilborg/php-roku/v/stable.png)](https://packagist.org/packages/svilborg/php-roku)
+[![Latest Unstable Version](https://poser.pugx.org/svilborg/php-roku/v/unstable.png)](https://packagist.org/packages/svilborg/php-roku)
+
+
 PHP Library for communication with Roku External Control Protocol
 
 Installation

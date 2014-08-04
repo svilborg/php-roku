@@ -12,7 +12,7 @@ class Http {
     public function get($uri, $params = array()) {
         $uri = $this->buildUri($uri, $params);
 
-        return = \Httpful\Request::get($uri)->send();
+        return \Httpful\Request::get($uri)->send();
     }
 
     /**

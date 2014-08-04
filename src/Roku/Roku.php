@@ -255,7 +255,15 @@ class Roku {
         $response = $this->client->post($this->getUri("launch", $app->getId()), $params);
 
         if ($response->code !== 200) {
-            throw new Exception("Command Error - launch");
+            if ($response->code == 204) {
+                throw new Exception("Application already launched");
+            }
+            elseif ($response->code == 204)  {
+                throw new Exception("Application Not Found");
+            }
+            else {
+                throw new Exception("Command Error - launch");    
+            }            
         }
 
         return $response->raw_body;

@@ -2,8 +2,9 @@
 namespace Tests\Roku;
 
 use \Roku\Commands\Command;
+use PHPUnit\Framework\TestCase;
 
-class CommandTest extends \PHPUnit_Framework_TestCase
+class CommandTest extends TestCase
 {
 
     public function setUp()

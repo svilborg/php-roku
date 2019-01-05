@@ -2,8 +2,9 @@
 namespace Tests\Roku;
 
 use \Roku\Commands\Sensor;
+use PHPUnit\Framework\TestCase;
 
-class SensorTest extends \PHPUnit_Framework_TestCase
+class SensorTest extends TestCase
 {
 
     public function setUp()

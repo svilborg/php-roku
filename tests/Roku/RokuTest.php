@@ -3,8 +3,9 @@ namespace Tests\Roku;
 
 use Roku;
 use \Httpful\Request;
+use PHPUnit\Framework\TestCase;
 
-class RokuTest extends \PHPUnit_Framework_TestCase
+class RokuTest extends TestCase
 {
 
     public function setUp() {
@@ -69,21 +70,21 @@ class RokuTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(new \Roku\Application("dev", "0.1.0", "Test App"), $app);
     }
 
+    /**
+     * @expectedException     \Roku\Exception
+     * @expectedExceptionCode 0
+     */
     public function testErrors()
     {
-        $this->setExpectedException(
-            '\Roku\Exception'
-            );
-
         $this->assertNotNull($this->roku->rotate());
     }
 
+    /**
+     * @expectedException     \Roku\Exception
+     * @expectedExceptionCode 0
+     */
     public function testErrorsTouch()
     {
-        $this->setExpectedException(
-            '\Roku\Exception'
-            );
-
         $this->assertNotNull($this->roku->touch(1,1,"nosuchtouch"));
     }
 
@@ -134,7 +135,7 @@ class RokuTest extends \PHPUnit_Framework_TestCase
 
         $response = new \Httpful\Response("", $headers, \Httpful\Request::init());
 
-        $http = $this->getMock('\Roku\Utils\Http');
+        $http = $this->createMock('\Roku\Utils\Http');
 
         // Configure the stub.
         $http->expects($this->any())
@@ -156,7 +157,7 @@ class RokuTest extends \PHPUnit_Framework_TestCase
 
         $response = new \Httpful\Response( file_get_contents(__DIR__."/../data/" . $file), $headers, \Httpful\Request::init());
 
-        $http = $this->getMock('\Roku\Utils\Http');
+        $http = $this->createMock('\Roku\Utils\Http');
 
         // Configure the stub.
         $http->expects($this->any())

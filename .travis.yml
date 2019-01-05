@@ -1,23 +1,16 @@
 language: php
 
 php:
-  - 5.3
-  - 5.4
-  - 5.5
+  - 7.1.18
+
 
 before_script:
-  - composer install --dev --no-interaction --prefer-source
+  - composer install --no-interaction --prefer-source
   - cp phpunit.dist.xml phpunit.xml
-  - phpunit --version
-  - pear config-set auto_discover 1
-  - pear install pear.phing.info/phing
-  - pear install pear.phpunit.de/phploc
-  - pear install pear/PHP_CodeSniffer
-  - pear install pear.pdepend.org/PHP_Depend
 
-script:
+script: 
   - mkdir -p build/logs
-  - phpunit --coverage-text
+  - ./vendor/bin/phpunit
 
-after_script:
-  - php vendor/bin/coveralls -v
+# after_script:
+# - php vendor/bin/coveralls -v

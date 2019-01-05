@@ -24,7 +24,7 @@ Create the composer.json file as follows:
 ```json
 { 
     "require": {
-        "phalcon/devtools": "dev-master"
+        "svilborg/php-roku": "dev-master"
     }
 }
 ```
